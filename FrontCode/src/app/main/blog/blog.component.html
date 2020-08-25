@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card cardTitle="Blog" [hidden]="blogDetails">
+            <div class="row">
+                <div class="col-md-2">
+                    <app-select #selectBlogType [title]="'Select Blog Type'" [defaultValue]="'0'" [(ngModel)]="blogSearch.typeId">
+                    </app-select>
+                </div>
+                <div class="col-md-7">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Name" [(ngModel)]="blogSearch.name">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" (click)="search()"><i
+                                    class="fa fa-search"></i>Search</button>
+                            <button class="btn btn-outline-primary" type="button" (click)="reset()"><i
+                                    class="fa fa-reply"></i>Reset</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" class="btn btn-outline-primary" ngbTooltip="btn-outline-primary"
+                        (click)="showBlogDetail()"><i class="fa fa-plus"></i>Create Blog</button>
+                </div>
+            </div>
+            <p-table [value]="datas" [lazy]="true" (onLazyLoad)="loadCarsLazy($event)"  [(first)]="first"
+                styleClass="ui-table-customers" [showCurrentPageReport]="true" [rowHover]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [filterDelay]="0" [rows]="rows" [paginator]="true" [loading]="loading" [totalRecords]="totalRecords">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 100px;">Type</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr class="ui-selectable-row">
+                        <td style="width: 100px;">
+                            {{rowData.typeName}}
+                        </td>
+                        <td>
+                            {{rowData.name}}
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-glow-success btn-success" data-toggle="tooltip"
+                                (click)="read(rowData.id)"><i class="fa fa-book"></i>Read</button>
+                            <button type="button" class="btn btn-glow-primary btn-primary" data-toggle="tooltip"
+                                (click)="showBlogDetail(rowData.id)"><i class="fa fa-file"
+                                    aria-hidden="true"></i>Detail</button>
+                            <button type="button" class="btn btn-glow-danger btn-danger" data-toggle="tooltip"
+                                (click)="delete(rowData)"><i class="fa fa-times" aria-hidden="true"></i>Delete</button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="3" style="text-align:center">No customers found.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </app-card>
+        <app-card cardTitle="{{blogDetails.name}}" *ngIf="blogDetails" [triggerName]="'back'"
+            (trigger)="blogDetails = null">
+            <div [innerHTML]="blogDetails.content">
+            </div>
+        </app-card>
+    </div>
+</div>
+<createOrEditBlogModal #createOrEditBlogModal (modalSave)="loadCarsLazy();selectBlogType.refresh();"></createOrEditBlogModal>
+<notifier-container></notifier-container>

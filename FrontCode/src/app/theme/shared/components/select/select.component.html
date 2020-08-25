@@ -1,0 +1,6 @@
+<select class="form-control" [formControl]="selectedDic">
+    <option value="{{defaultValue}}">{{title}}</option>
+    <option *ngFor="let dicKeyAndName of dicKeyAndNames"  [value]="dicKeyAndName.key">
+        {{dicKeyAndName.name}}
+    </option>
+</select>
