@@ -10,6 +10,9 @@ export class CodingtestComponent implements OnInit {
   public tblLeftDatas: Array<TblLeft> = [];
   public tblRightDatas: Array<TblRight> = [];
   public generateDatas: Array<GenerateData> = [];
+  public checkedLeft: boolean = false;
+  public checkedRight: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
@@ -24,6 +27,13 @@ export class CodingtestComponent implements OnInit {
     ];
   }
 
+  selectAll(datas, leftOrRight) {
+    leftOrRight = !leftOrRight
+    datas.forEach(data => {
+      data.checked = leftOrRight;
+    });
+  }
+
   pushRight() {
     let datachecked = this.tblLeftDatas.filter(leftData => leftData.checked === true);
     datachecked.forEach(data => {
@@ -33,6 +43,7 @@ export class CodingtestComponent implements OnInit {
       }
     });
     this.tblLeftDatas = this.tblLeftDatas.filter(leftData => leftData.checked === false);
+    this.checkedLeft = false;
   }
 
   pushLeft() {
@@ -45,9 +56,10 @@ export class CodingtestComponent implements OnInit {
     });
     this.tblRightDatas = this.tblRightDatas.filter(rightData => rightData.checked === false);
     this.generateEmail();
+    this.checkedRight = false;
   }
 
-  generateEmail() { 
+  generateEmail() {
     this.generateDatas = [];
     this.tblRightDatas.forEach(rightData => {
       let generateData = new GenerateData(rightData.id, rightData.reposname, rightData.reposid, rightData.language, rightData.description, rightData.cloneUrl);
