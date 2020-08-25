@@ -1,1 +1,2 @@
 # zhaoxiaotong_ct
+1.在MySQL数据库直接执行CreateDBScript文件夹下的CreateCodingTestDB.sql文件即可成功创建该数据库及相关数据表
