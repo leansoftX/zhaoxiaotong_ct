@@ -3,6 +3,8 @@ USE CodingTest;
 CREATE TABLE IF NOT EXISTS  TblLeft (
 Id int(11) auto_increment primary key, 
 TblReposDetailId int(11),
+IsDeleted boolean, 
+DeletedDescription longtext, 
 CreatedOn DateTime(6));
 
 CREATE TABLE IF NOT EXISTS  TblRight (
