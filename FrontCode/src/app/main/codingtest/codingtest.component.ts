@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TblLeft, TblRight, GenerateData } from './models/codingtestData';
+import { CodingTestServiceProxy } from 'src/app/shared/service-proxies/service-proxies';
 
 @Component({
   selector: 'app-codingtest',
@@ -13,18 +14,31 @@ export class CodingtestComponent implements OnInit {
   public checkedLeft: boolean = false;
   public checkedRight: boolean = false;
 
-  constructor() { }
+
+  constructor(private codingTestServiceProxy: CodingTestServiceProxy) {
+
+  }
 
   ngOnInit() {
     this.initDatas()
   }
 
   initDatas() {
-    this.tblLeftDatas = [
-      new TblLeft(1, 'reposname1', '1', 'C#', 'repos description 1', "repos url 1"),
-      new TblLeft(2, 'reposname2', '2', 'Java', 'repos description 2', "repos url 1"),
-      new TblLeft(3, 'reposname3', '3', 'C++', 'repos description 3', "repos url 1")
-    ];
+    this.codingTestServiceProxy.getTblLeftInfos().subscribe(res => {
+      res.forEach(data => {
+        let tblLeft = new TblLeft(data.id, data.tblReposDetailId, data.reposName, data.reposId, data.language, data.description, data.cloneUrl);
+        this.tblLeftDatas.push(tblLeft);
+      });
+    });
+
+    this.codingTestServiceProxy.getTblRightInfos().subscribe(res => {
+      res.forEach(data => {
+        let tblRight = new TblRight(data.id, data.tblReposDetailId, data.reposName, data.reposId, data.language, data.description, data.cloneUrl);
+        this.tblRightDatas.push(tblRight);
+        this.generateEmail();
+      });
+    });
+
   }
 
   selectAll(datas, leftOrRight) {
@@ -34,24 +48,30 @@ export class CodingtestComponent implements OnInit {
     });
   }
 
-  pushRight() {
+  pullRight() {
     let datachecked = this.tblLeftDatas.filter(leftData => leftData.checked === true);
     datachecked.forEach(data => {
-      if (this.tblRightDatas.filter(rightData => rightData.tblleftid === data.id).length === 0) {
-        let tblRightData = new TblRight(data.id, data.reposname, data.reposid, data.language, data.description, data.cloneUrl);
+      if (this.tblRightDatas.filter(rightData => rightData.tblreposdetailId === data.tblreposdetailId).length === 0) {
+        let tblRightData = new TblRight(data.id, data.tblreposdetailId, data.reposname, data.reposid, data.language, data.description, data.cloneUrl);
         this.tblRightDatas.push(tblRightData);
+        this.codingTestServiceProxy.pullRight(tblRightData.tblreposdetailId).subscribe(res => {
+          console.log("pullRight success");
+        });
       }
     });
     this.tblLeftDatas = this.tblLeftDatas.filter(leftData => leftData.checked === false);
     this.checkedLeft = false;
   }
 
-  pushLeft() {
+  pullLeft() {
     let datachecked = this.tblRightDatas.filter(rightData => rightData.checked === true);
     datachecked.forEach(data => {
-      if (this.tblLeftDatas.filter(leftData => leftData.id === data.tblleftid).length === 0) {
-        let tblLeftData = new TblLeft(data.tblleftid, data.reposname, data.reposid, data.language, data.description, data.cloneUrl);
+      if (this.tblLeftDatas.filter(leftData => leftData.tblreposdetailId === data.tblreposdetailId).length === 0) {
+        let tblLeftData = new TblLeft(data.id, data.tblreposdetailId, data.reposname, data.reposid, data.language, data.description, data.cloneUrl);
         this.tblLeftDatas.push(tblLeftData);
+        this.codingTestServiceProxy.pullLeft(tblLeftData.tblreposdetailId).subscribe(res => {
+          console.log("pullLeft success");
+        });
       }
     });
     this.tblRightDatas = this.tblRightDatas.filter(rightData => rightData.checked === false);

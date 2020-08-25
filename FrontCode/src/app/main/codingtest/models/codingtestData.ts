@@ -1,5 +1,6 @@
 export class TblLeft {
     id: number;
+    tblreposdetailId: number;
     reposname: string;
     reposid: string;
     language: string;
@@ -7,8 +8,9 @@ export class TblLeft {
     checked: boolean = false;
     cloneUrl: string;
 
-    constructor(id, reposname, reposid, language, description, cloneUrl) {
+    constructor(id, tblreposdetailId, reposname, reposid, language, description, cloneUrl) {
         this.id = id;
+        this.tblreposdetailId = tblreposdetailId;
         this.reposname = reposname;
         this.reposid = reposid;
         this.language = language;
@@ -19,7 +21,7 @@ export class TblLeft {
 
 export class TblRight {
     id: number;
-    tblleftid: number;
+    tblreposdetailId: number;
     reposname: string;
     reposid: string;
     language: string;
@@ -27,9 +29,10 @@ export class TblRight {
     checked: boolean = false;
     cloneUrl: string;
 
-    constructor(tblleftid, reposname, reposid, language, description, cloneUrl) {
+    constructor(id, tblreposdetailId, reposname, reposid, language, description, cloneUrl) {
+        this.id = id;
+        this.tblreposdetailId = tblreposdetailId;
         this.reposname = reposname;
-        this.tblleftid = tblleftid;
         this.reposid = reposid;
         this.language = language;
         this.description = description;
