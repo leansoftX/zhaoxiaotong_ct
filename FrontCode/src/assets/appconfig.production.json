@@ -1,0 +1,5 @@
+{
+  "appBaseUrl": "http://47.96.25.72",
+  "remoteServiceBaseUrl": "https://webapi.tishuge.fun",
+  "tokenServiceBaseUrl": "https://jwtapi.tishuge.fun"
+}

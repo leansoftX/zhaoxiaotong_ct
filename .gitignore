@@ -1,0 +1,21 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/BehindCode/Infrastructure.IoC/bin/Debug/netstandard2.0
+/BehindCode/Infrastructure.EventBus/obj
+/BehindCode/Infrastructure.IoC/obj
+/BehindCode/Infrastructure.MemoryCache/bin/Debug/netstandard2.0
+/BehindCode/Infrastructure.MemoryCache/obj
+/BehindCode/Infrastructure.Repository/bin/Debug/netstandard2.0
+/BehindCode/Infrastructure.Repository/obj
+/BehindCode/WebApi/bin/Debug/netcoreapp3.1
+/BehindCode/WebApi/obj
+/BehindCode/Infrastructure.Common/obj
+/BehindCode/Infrastructure.Common/bin/Debug/netstandard2.0
+/BehindCode/Application/obj
+/BehindCode/Application/bin/Debug/netstandard2.0
+/BehindCode/.vs/WebApi
+/BehindCode/Domain/obj
+/BehindCode/Domain/bin/Debug/netstandard2.0
+/BehindCode/WebApi/Logs
