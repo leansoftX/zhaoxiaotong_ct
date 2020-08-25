@@ -1,1 +1,95 @@
-<p>codingtest works!</p>
+<div class="row">
+    <div class="col-md-5">
+        <app-card cardTitle="All Repos" cardClass="Recent-Users" blockClass="px-0 py-3">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <tbody>
+              <tr class="unread"  *ngFor="let leftData of tblLeftDatas;">
+                <td>
+                    <div class="form-check disabled">
+                        <label class="form-check-label">
+                          <input type="checkbox" class="form-check-input" value="" [(ngModel)]="leftData.checked"> &nbsp;
+                        </label>
+                      </div>
+                </td>
+                <td>
+                  <h6 class="mb-1">{{ leftData.reposname }}</h6>
+                </td>
+                <td>
+                    <h6 class="mb-1">{{ leftData.description }}</h6>
+                </td>
+                <td>
+                  <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>{{ leftData.language }}</h6></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </app-card>
+      </div>
+      <div class="col-md-2">
+        <app-card [hidHeader]="true" [options]="false">
+          <button type="button" class="btn shadow-2 btn-success col-sm-12" (click)="pushRight()">>>></button>
+          <button type="button" class="btn shadow-1 btn-primary col-sm-12" (click)="pushLeft()"><<<</button>
+        </app-card>
+      </div>
+      <div class="col-md-5">
+        <app-card cardTitle="My Favor Repos" cardClass="Recent-Users" blockClass="px-0 py-3">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <tbody>
+                <tr class="unread"  *ngFor="let rightData of tblRightDatas;">
+                    <td>
+                        <div class="form-check disabled">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="" [(ngModel)]="rightData.checked"> &nbsp;
+                            </label>
+                          </div>
+                    </td>
+                    <td>
+                      <h6 class="mb-1">{{ rightData.reposname }}</h6>
+                    </td>
+                    <td>
+                        <h6 class="mb-1">{{ rightData.description }}</h6>
+                    </td>
+                    <td>
+                      <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>{{ rightData.language }}</h6></td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </app-card>
+      </div>
+</div>
+<div class="row">
+    <div class="col-md-12 " >
+        <app-card [hidHeader]="true"  style="text-align:center">
+          <button type="button" class="btn shadow-1 btn-info col-sm-4" (click)="generateEmail()">Generate Email</button>
+        </app-card>
+      </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <app-card cardTitle="My Favor Repos" cardClass="Recent-Users" blockClass="px-0 py-3">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <tbody>
+                <tr class="unread"  *ngFor="let generateData of generateDatas;">
+                
+                    <td>
+                      <h6 class="mb-1">{{ generateData.reposname }}</h6>
+                    </td>
+                    <td>
+                        <h6 class="mb-1">{{ generateData.description }}</h6>
+                    </td>
+                    <td>
+                        <h6 class="mb-1">{{ generateData.cloneUrl }}</h6>
+                    </td>
+                    <td>
+                      <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>{{ generateData.language }}</h6></td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </app-card>
+      </div>
+</div>
